@@ -1,33 +1,31 @@
+# -*- coding: utf-8 -*-
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+import time
 
 
-token = u'883808686:AAGr0NIkmfUDBKXs6Y3cExoi3CKxJsPtILE'
+token = u'883808686:AAE4EmhBTO8TeT7O5poI5WyiPUEa2WaWNd8'
 
-# check for new messages from API (polling)
 updater = Updater(token=token)
 
-# allow to register handler
 dispatcher = updater.dispatcher
 
-# define a command callback function
 def start(bot, update):
-    bot.send_message(chat_id=update.message.chat_id, text="Hello, welcome do LimaBOT")
-
-# create a command handler
-start_handler = CommandHandler("start", start)
-
-# add command handler to dispatcher
-dispatcher.add_handler(start_handler)
+    try:
+        bot.send_message(chat_id=update.message.chat_id, text="Olá {first_name}!".format(first_name=update.message.chat.first_name))
+    except Exception as ex:
+        print(ex)
 
 def echo(bot, update):
-    print(update.message.text)
-    bot.send_message(chat_id=update.message.chat_id, text=update.message.text.upper())
+    try:
+        bot.send_message(chat_id=update.message.chat_id, text="Olá {first_name}!".format(first_name=update.message.chat.first_name))
 
-# create a text message handler
+        print(update)
+    except Exception as ex:
+        print(ex)
+
+start_handler = CommandHandler("start", start)
+dispatcher.add_handler(start_handler)
+
 echo_handler = MessageHandler(Filters.text, echo)
-
-# add message handler to dispatcher
 dispatcher.add_handler(echo_handler)
-
-#start pooling
 updater.start_polling()
