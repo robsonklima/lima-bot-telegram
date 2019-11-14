@@ -4,10 +4,9 @@ import time
 
 
 token = u'883808686:AAE4EmhBTO8TeT7O5poI5WyiPUEa2WaWNd8'
-
 updater = Updater(token=token)
-
 dispatcher = updater.dispatcher
+
 
 def start(bot, update):
     try:
@@ -22,6 +21,7 @@ def echo(bot, update):
         print(update)
     except Exception as ex:
         print(ex)
+
 
 start_handler = CommandHandler("start", start)
 dispatcher.add_handler(start_handler)
